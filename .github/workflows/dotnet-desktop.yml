@@ -1,0 +1,27 @@
+name: Build .NET 8 Solution
+
+on:
+  push:
+    branches:
+      - main  # Adjust the branch name if needed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '8.0.x'  # Adjust to the desired .NET 8 version
+
+    - name: Restore dependencies
+      run: dotnet restore dotnet-kubernetes/eShopLite.sln
+
+    - name: Build solution
+      run: dotnet build dotnet-kubernetes/eShopLite.sln
+
+    
